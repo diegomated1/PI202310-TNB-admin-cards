@@ -4,23 +4,21 @@ import ui from 'uniqid';
 
 const insertCards = async (req:Request, res:Response, next: NextFunction)=>{
     try{
-        const {name, description} = req.body;
-        const card = new CardModel({_id: ui.time(), name: name, description: description});
+        const card_info = req.body;
+        const card = new CardModel({...card_info, _id: ui.process});
         await card.save();
         res.status(200).json({status: true});
     }catch(error){
-        res.status(400).json({status: false});
+        res.status(500).json({status: false});
     }
 }
 
 const getAllCards = async (req:Request, res:Response, next: NextFunction)=>{
     try{
         const card = await CardModel.find();
-        console.log(card);
         res.status(200).json({status: true, data: card});
     }catch(error){
-        console.log(error)
-        res.status(400).json({status: false});
+        res.status(500).json({status: false});
     }
 }
 
@@ -30,7 +28,7 @@ const getCardsById = async (req:Request, res:Response, next: NextFunction)=>{
         const card = await CardModel.findById(id_card);
         res.status(200).json({status: true, data: card});
     }catch(error){
-        res.status(400).json({status: false});
+        res.status(500).json({status: false});
     }
 }
 
