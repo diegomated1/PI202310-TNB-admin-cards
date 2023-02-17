@@ -5,7 +5,10 @@ const CardModel = db.model('cards', new mongoose.Schema({
     _id: String,
     name: String,
     description: String,
-    type: Number
+    id_hero: String,
+    image: String,
+    card_type: Number,
+    Efects: Array
 }));
 
 export default CardModel;
