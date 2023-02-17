@@ -5,10 +5,11 @@ import ui from 'uniqid';
 const insertCards = async (req:Request, res:Response, next: NextFunction)=>{
     try{
         const card_info = req.body;
-        const card = new CardModel({...card_info, _id: ui.process});
+        const card = new CardModel({...card_info, _id: ui.process()});
         await card.save();
         res.status(200).json({status: true});
     }catch(error){
+        console.log(error)
         res.status(500).json({status: false});
     }
 }
