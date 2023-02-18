@@ -1,8 +1,9 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import morgan from 'morgan';
-//import userR from './router/user.route.js';
 import cardsRouter from './router/cards.router.js';
+import heroesRouter from './router/heroes.router';
+
 
 class Server{
 
@@ -23,6 +24,7 @@ class Server{
 
     private routes(){
         this.app.use(cardsRouter.router);
+        this.app.use(heroesRouter.router);
     }
 
     private start(){
