@@ -10,6 +10,7 @@ const HeroesModel = db.model('heroesCards', new mongoose.Schema({
     attack_basic: Number,
     attack_range: Number,
     damage_range: Number,
+    // agregar descripción a esta entidad
     image: String
 }));
 
