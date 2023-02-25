@@ -3,6 +3,7 @@ import express from 'express';
 import morgan from 'morgan';
 //import userR from './router/user.route.js';
 import cardsRouter from './router/cards.router.js';
+import cors from 'cors';
 
 class Server{
 
@@ -17,6 +18,10 @@ class Server{
 
     private config(){
         dotenv.config();
+        this.app.use(cors({
+            origin: process.env.CLIENT_HOST! || '*',
+            credentials: true
+        }));
         this.app.use(express.json());
         this.app.use(morgan('dev'));
     }
