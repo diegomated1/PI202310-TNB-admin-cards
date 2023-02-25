@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cardsRouter from './router/cards.router.js';
 import cors from 'cors';
 import heroesRouter from './router/heroes.router';
+import reportsRouter from './router/reports.router.js';
 
 class Server{
 
@@ -29,6 +30,7 @@ class Server{
     private routes(){
         this.app.use(cardsRouter.router);
         this.app.use(heroesRouter.router);
+        this.app.use(reportsRouter.router);
     }
 
     private start(){
