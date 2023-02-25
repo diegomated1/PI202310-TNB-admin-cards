@@ -1,14 +1,22 @@
 import { Request, Response, NextFunction } from 'express';
 import CardModel from '../models/cards.model.js';
 import ui from 'uniqid';
+import path from 'path';
+import fs from 'fs';
 
 const insertCards = async (req:Request, res:Response, next: NextFunction)=>{
     try{
         const card_info = req.body;
-        const card = new CardModel({...card_info, _id: ui.process});
+        if(req.file){
+            var id_card = path.parse(req.file.filename).name;
+        }else{
+            var id_card = ui.process();
+        }
+        const card = new CardModel({...card_info, _id: id_card});
         await card.save();
         res.status(200).json({status: true});
     }catch(error){
+        console.log(error);
         res.status(500).json({status: false});
     }
 }
@@ -32,8 +40,24 @@ const getCardsById = async (req:Request, res:Response, next: NextFunction)=>{
     }
 }
 
+const getCardImage = async (req:Request, res:Response, next: NextFunction)=>{
+    try{
+        const {id_card} = req.params;
+        var route = path.join(__dirname, `../../uploads/card_images/${id_card}.jpg`);
+        fs.open(route, 'r', (err, df)=>{
+            if(err) res.status(404).json({error: 0, message: "Image not found"});
+            else{
+                res.sendFile(route);
+            }
+        });
+    }catch(error){
+        res.status(500).json({error: 1, status: false});
+    }
+} 
+
 export default {
     insertCards,
     getAllCards,
-    getCardsById
+    getCardsById,
+    getCardImage
 }
