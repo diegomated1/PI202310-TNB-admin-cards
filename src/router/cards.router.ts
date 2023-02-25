@@ -1,5 +1,6 @@
 import { Router } from "express";
 import cardsController from "../controllers/cards.controller.js";
+import upload from "../middlewares/image.save.js";
 
 class CardRouter {
 
@@ -11,10 +12,11 @@ class CardRouter {
     }
 
     private config(){
-        this.router.route('/cards').post(cardsController.insertCards);
+        this.router.route('/cards').post(upload.single('card_image'), cardsController.insertCards);
         
         this.router.route('/cards').get(cardsController.getAllCards);
         this.router.route('/cards/:id_card').get(cardsController.getCardsById);
+        this.router.route('/images/cards/:id_card').get(cardsController.getCardImage);
     }
 
 }
