@@ -4,8 +4,8 @@ import ui from 'uniqid';
 import path from 'path';
 import fs from 'fs';
 
-const insertCards = async (req:Request, res:Response, next: NextFunction)=>{
-    try{
+const insertCards = async (req: Request, res: Response, next: NextFunction) => {
+    try {
         const card_info = req.body;
         if(req.file){
             var id_card = path.parse(req.file.filename).name;
@@ -21,22 +21,47 @@ const insertCards = async (req:Request, res:Response, next: NextFunction)=>{
     }
 }
 
-const getAllCards = async (req:Request, res:Response, next: NextFunction)=>{
-    try{
+const getAllCards = async (req: Request, res: Response, next: NextFunction) => {
+    try {
         const card = await CardModel.find();
-        res.status(200).json({status: true, data: card});
-    }catch(error){
-        res.status(500).json({status: false});
+        res.status(200).json({ status: true, data: card });
+    } catch (error) {
+        res.status(500).json({ status: false });
     }
 }
 
-const getCardsById = async (req:Request, res:Response, next: NextFunction)=>{
-    try{
-        const {id_card} = req.params;
+const getCardsById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { id_card } = req.params;
         const card = await CardModel.findById(id_card);
-        res.status(200).json({status: true, data: card});
-    }catch(error){
-        res.status(500).json({status: false});
+        res.status(200).json({ status: true, data: card });
+    } catch (error) {
+        res.status(500).json({ status: false });
+    }
+}
+
+const modifyCardsById = async (req: Request, res: Response, next: NextFunction) => {
+    let params = req.params;
+    const card = await CardModel.findById(params.id_card);
+    if (card == null) {
+        res.status(404).json({ info: 'carta no existe' })
+    } else {
+        try {
+            let body = req.body;
+            await card.update({
+                $set: {
+                    name: body.name,
+                    description: body.description,
+                    id_hero: body.id_hero,
+                    image: body.image,
+                    card_type: body.card_type,
+                    effects: body.effects
+                }
+            });
+            res.status(200).json({status:true, info: 'Se actualizo la carta con exito'})
+        } catch {
+            res.status(500).json({ status: false, info: 'no se actualizo la carta' })
+        }
     }
 }
 
@@ -59,5 +84,6 @@ export default {
     insertCards,
     getAllCards,
     getCardsById,
-    getCardImage
+    getCardImage,
+    modifyCardsById
 }
