@@ -52,6 +52,16 @@ const getById = async (req:Request, res:Response, next: NextFunction)=>{
   }
 }
 
+const getAll = async (req:Request, res:Response, next: NextFunction)=>{
+  try{
+      const hero = await HeroesModel.find();
+      res.status(200).json({error: 0, status: true, data: hero});
+  }catch(error){
+      console.log(error)
+      res.status(500).json({error: 0, status: false, message: 'Server internal error.'});
+  }
+}
+
 const modifyHeroesById = async (req: Request, res: Response, next: NextFunction) => {
   let params = req.params;
   const hero = await HeroesModel.findById(params.id_heroes);
@@ -84,6 +94,6 @@ export default {
   insertHeroes,
   getHeroeImage,
   getById,
-  modifyHeroesById
-
+  modifyHeroesById,
+  getAll
 }
