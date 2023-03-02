@@ -34,7 +34,11 @@ const getCardsById = async (req: Request, res: Response, next: NextFunction) => 
     try {
         const { id_card } = req.params;
         const card = await CardModel.findById(id_card);
-        res.status(200).json({ status: true, data: card });
+        if(card){
+            res.status(200).json({ status: true, data: card });
+        }else{
+            res.status(404).json({ status: true, message: 'card not found' });
+        }
     } catch (error) {
         res.status(500).json({ status: false });
     }
