@@ -7,7 +7,7 @@ const CardModel = db.model('cards', new mongoose.Schema({
     description: String,
     id_hero: String,
     image: String,
-    card_type: Number,
+    card_type: String,
     effects: Array
 }));
 

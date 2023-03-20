@@ -70,6 +70,7 @@ const modifyCardsById = async (req: Request, res: Response, next: NextFunction) 
 }
 
 const getCardImage = async (req:Request, res:Response, next: NextFunction)=>{
+    
     try{
         const {id_card} = req.params;
         var route = path.join(__dirname, `../../uploads/card_images/${id_card}.jpg`);
