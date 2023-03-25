@@ -7,7 +7,7 @@ const upload = multer({
         cb(null, './uploads/card_images');
     },
     filename: function (req, file, cb) {
-        var id_card = ui.process();
+        var id_card = req.params.id_card || ui.process();
         cb(null, `${id_card}.jpg`);
     }
 })});
