@@ -45,6 +45,7 @@ const getCardsById = async (req: Request, res: Response, next: NextFunction) => 
 }
 
 const modifyCardsById = async (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.file);
     let params = req.params;
     const card = await CardModel.findById(params.id_card);
     if (card == null) {
@@ -52,6 +53,7 @@ const modifyCardsById = async (req: Request, res: Response, next: NextFunction) 
     } else {
         try {
             let body = req.body;
+            console.log(body);
             await card.update({
                 $set: {
                     name: body.name,
@@ -59,7 +61,7 @@ const modifyCardsById = async (req: Request, res: Response, next: NextFunction) 
                     id_hero: body.id_hero,
                     image: body.image,
                     card_type: body.card_type,
-                    effects: body.effects
+                    effects: (body.effects) ? JSON.parse(body.effects) : []
                 }
             });
             res.status(200).json({status:true, info: 'Se actualizo la carta con exito'})

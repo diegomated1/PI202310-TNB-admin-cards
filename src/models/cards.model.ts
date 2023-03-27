@@ -8,7 +8,7 @@ const CardModel = db.model('cards', new mongoose.Schema({
     id_hero: String,
     image: String,
     card_type: String,
-    effects: Array
+    effects: [String]
 }));
 
 export default CardModel;
