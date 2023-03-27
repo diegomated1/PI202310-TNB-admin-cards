@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
-import db from '../database/mongo.db.js';
 
-const ReportsModel = db.model('reports', new mongoose.Schema({
+const ReportsModel = mongoose.model('reports', new mongoose.Schema({
     _id: String,
     post: String,
     description: String,

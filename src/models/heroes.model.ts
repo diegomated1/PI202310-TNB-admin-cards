@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
-import db from '../database/mongo.db.js';
 
-const HeroesModel = db.model('heroesCards', new mongoose.Schema({
+const HeroesModel = mongoose.model('heroesCards', new mongoose.Schema({
     _id: String,
     name: String,
     power: Number,
