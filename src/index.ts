@@ -5,6 +5,7 @@ import cardsRouter from './router/cards.router.js';
 import cors from 'cors';
 import heroesRouter from './router/heroes.router';
 import reportsRouter from './router/reports.router.js';
+import mongoDb from './database/mongo.db.js';
 
 class Server{
 
@@ -19,6 +20,7 @@ class Server{
 
     private config(){
         dotenv.config();
+        new mongoDb().connect();
         this.app.use(cors({
             origin: process.env.CLIENT_HOST! || '*',
             credentials: true
