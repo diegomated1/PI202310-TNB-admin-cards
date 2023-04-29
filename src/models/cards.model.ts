@@ -5,7 +5,6 @@ const CardModel = mongoose.model('cards', new mongoose.Schema({
     name: String,
     description: String,
     id_hero: String,
-    image: String,
     card_type: String,
     effects: [String]
 }));
