@@ -25,7 +25,7 @@ const insertHeroes = async (req:Request, res:Response, next: NextFunction)=>{
 const getHeroeImage = async (req:Request, res:Response, next: NextFunction)=>{
     try{
         const {id_hero} = req.params;
-        var route = path.join(__dirname, `../../uploads/hero_images/${id_hero}.jpg`);
+        var route = path.join(__dirname, `../../uploads/card_images/${id_hero}.jpg`);
         fs.open(route, 'r', (err, df)=>{
             if(err) res.status(404).json({error: 0, message: "Image not found"});
             else{
