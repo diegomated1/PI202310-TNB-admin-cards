@@ -7,6 +7,14 @@ import fs from 'fs';
 const insertCards = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const card_info = req.body;
+
+        if(typeof(card_info.atq)=='string'){
+            card_info.atq = JSON.parse(card_info.atq);
+        }
+        if(typeof(card_info.dmg)=='string'){
+            card_info.dmg = JSON.parse(card_info.dmg);
+        }
+
         if(req.file){
             var id_card = path.parse(req.file.filename).name;
         }else{
