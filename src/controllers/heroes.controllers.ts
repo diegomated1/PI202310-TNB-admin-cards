@@ -2,12 +2,18 @@ import { Request, Response, NextFunction } from 'express';
 import HeroesModel from '../models/heroes.model';
 import ui from 'uniqid';
 import path from 'path';
-import fs from 'fs';
-import IHero from 'interfaces/IHero';
 
 const insertHeroes = async (req:Request, res:Response, next: NextFunction)=>{
     try{
         const card_info = req.body;
+
+        if(typeof(card_info.atq)=='string'){
+            card_info.atq = JSON.parse(card_info.atq);
+        }
+        if(typeof(card_info.dmg)=='string'){
+            card_info.dmg = JSON.parse(card_info.dmg);
+        }
+
         if(req.file){
             var id_hero = path.parse(req.file.filename).name;
         }else{

@@ -8,11 +8,8 @@ const insertCards = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const card_info = req.body;
 
-        if(typeof(card_info.atq)=='string'){
-            card_info.atq = JSON.parse(card_info.atq);
-        }
-        if(typeof(card_info.dmg)=='string'){
-            card_info.dmg = JSON.parse(card_info.dmg);
+        if(typeof(card_info.effects)=='string'){
+            card_info.effects = JSON.parse(card_info.effects);
         }
 
         if(req.file){
