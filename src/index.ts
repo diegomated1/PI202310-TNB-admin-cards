@@ -30,9 +30,9 @@ class Server{
     }
 
     private routes(){
-        this.app.use(cardsRouter.router);
-        this.app.use(heroesRouter.router);
-        this.app.use(reportsRouter.router);
+        this.app.use('/cards', cardsRouter.router);
+        this.app.use('/cards', heroesRouter.router);
+        this.app.use('/cards', reportsRouter.router);
     }
 
     private start(){

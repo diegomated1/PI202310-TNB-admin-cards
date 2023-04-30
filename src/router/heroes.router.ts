@@ -13,13 +13,11 @@ class HeroesRouter {
     }
 
     private config(){
-        //Metodos de Santiago M
-        //this.router.route('/heroes').post(HeroesController.insertHeroes);
-        this.router.route('/images/Heroes/:id_heroes').get(HeroesController.getHeroeImage);
+        this.router.route('/images/Heroes/:id_hero').get(HeroesController.getHeroeImage);
         this.router.route('/heroes').post(upload.single('card_image'), HeroesController.insertHeroes);
         this.router.route('/heroes').get(heroesControllers.getAll);
-        this.router.route('/heroes/:id_heroes').get(heroesControllers.getById);
-        this.router.route('/heroes/:id_heroes').put(heroesControllers.modifyHeroesById);
+        this.router.route('/heroes/:id_hero').get(heroesControllers.getById);
+        this.router.route('/heroes/:id_hero').put(heroesControllers.modifyHeroesById);
     }
 
 }
