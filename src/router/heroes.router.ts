@@ -13,7 +13,6 @@ class HeroesRouter {
     }
 
     private config(){
-        this.router.route('/images/Heroes/:id_hero').get(HeroesController.getHeroeImage);
         this.router.route('/heroes').post(upload.single('card_image'), HeroesController.insertHeroes);
         this.router.route('/heroes').get(heroesControllers.getAll);
         this.router.route('/heroes/:id_hero').get(heroesControllers.getById);

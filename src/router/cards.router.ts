@@ -16,7 +16,7 @@ class CardRouter {
         this.router.route('/cards').get(cardsController.getAllCards);
         this.router.route('/cards/:id_card').get(cardsController.getCardsById);
         this.router.route('/cards/:id_card').put(upload.single('card_image'), cardsController.modifyCardsById);
-        this.router.route('/images/cards/:id_card').get(cardsController.getCardImage);
+        this.router.route('/images/:id_card').get(cardsController.getCardImage);
     }
 
 }
